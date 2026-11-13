@@ -1,0 +1,91 @@
+{
+  "data_dir": "E:\\DACN\\DACN\\data\\PhishVN_v3.1.0_open\\data\\splits",
+  "target": "label (benign=0, phishing=1)",
+  "features": [
+    "url_len",
+    "num_dots",
+    "num_subdomains",
+    "has_ip",
+    "has_at",
+    "suspicious_tld"
+  ],
+  "model_parameters": {
+    "n_estimators": 1000,
+    "max_depth": null,
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "max_features": "sqrt",
+    "criterion": "gini",
+    "class_weight": "balanced_subsample",
+    "decision_threshold": 0.5,
+    "random_state": 42
+  },
+  "splits": {
+    "train": {
+      "rows": 36909,
+      "class_counts": {
+        "benign": 11004,
+        "phishing": 25905
+      },
+      "accuracy": 0.7708959874285405,
+      "precision_phishing": 0.9324411400247832,
+      "recall_phishing": 0.7261918548542753,
+      "f1_phishing": 0.8164930555555555,
+      "roc_auc": 0.9082121617651836,
+      "confusion_matrix_labels_benign_phishing": [
+        [
+          9641,
+          1363
+        ],
+        [
+          7093,
+          18812
+        ]
+      ]
+    },
+    "val": {
+      "rows": 7266,
+      "class_counts": {
+        "benign": 1561,
+        "phishing": 5705
+      },
+      "accuracy": 0.749793559042114,
+      "precision_phishing": 0.940004527960154,
+      "recall_phishing": 0.7277826468010518,
+      "f1_phishing": 0.8203912270302312,
+      "roc_auc": 0.8668187823149838,
+      "confusion_matrix_labels_benign_phishing": [
+        [
+          1296,
+          265
+        ],
+        [
+          1553,
+          4152
+        ]
+      ]
+    },
+    "test": {
+      "rows": 8941,
+      "class_counts": {
+        "benign": 3845,
+        "phishing": 5096
+      },
+      "accuracy": 0.7902919136561906,
+      "precision_phishing": 0.9162574308606876,
+      "recall_phishing": 0.6956436420722135,
+      "f1_phishing": 0.7908533184606804,
+      "roc_auc": 0.9317125494791294,
+      "confusion_matrix_labels_benign_phishing": [
+        [
+          3521,
+          324
+        ],
+        [
+          1551,
+          3545
+        ]
+      ]
+    }
+  }
+}
