@@ -27,6 +27,12 @@ def parse_args() -> argparse.Namespace:
         description="Evaluate a trained Random Forest on url_test.csv."
     )
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR)
+    parser.add_argument(
+        "--feature-data",
+        type=Path,
+        default=None,
+        help="CompPhish feature CSV (defaults to vn_compphish.csv beside the splits directory)",
+    )
     parser.add_argument("--model-in", type=Path, default=DEFAULT_MODEL_IN)
     parser.add_argument("--metrics-out", type=Path, default=DEFAULT_METRICS_OUT)
     parser.add_argument(
@@ -54,7 +60,9 @@ def main() -> None:
         raise ValueError("Decision threshold must be between 0 and 1")
 
     test_features, test_labels = trainer.load_splits(
-        args.data_dir, split_names=("test",)
+        args.data_dir,
+        split_names=("test",),
+        feature_data_path=args.feature_data,
     )["test"]
     result = trainer.evaluate(model, test_features, test_labels, threshold)
     report = {

@@ -3,11 +3,26 @@
   "target": "label (benign=0, phishing=1)",
   "features": [
     "url_len",
-    "num_dots",
-    "num_subdomains",
-    "has_ip",
-    "has_at",
-    "suspicious_tld"
+    "dom_len",
+    "is_ip",
+    "tld_len",
+    "subdom_cnt",
+    "letter_cnt",
+    "digit_cnt",
+    "special_cnt",
+    "eq_cnt",
+    "qm_cnt",
+    "amp_cnt",
+    "dot_cnt",
+    "dash_cnt",
+    "under_cnt",
+    "letter_ratio",
+    "digit_ratio",
+    "spec_ratio",
+    "slash_cnt",
+    "entropy",
+    "path_len",
+    "query_len"
   ],
   "model_parameters": {
     "n_estimators": 1000,
@@ -16,7 +31,7 @@
     "min_samples_leaf": 1,
     "max_features": "sqrt",
     "criterion": "gini",
-    "class_weight": "balanced_subsample",
+    "class_weight": null,
     "decision_threshold": 0.5,
     "random_state": 42
   },
@@ -31,20 +46,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3518455380967889,
-          "accuracy": 0.7721964832425695,
-          "precision_phishing": 0.930981821764619,
-          "recall_phishing": 0.7295116772823779,
-          "f1_phishing": 0.8180244134706952,
-          "roc_auc": 0.9081919203144955,
+          "log_loss": 0.19735936665121595,
+          "accuracy": 0.9065268633666586,
+          "precision_phishing": 0.9115803365225998,
+          "recall_phishing": 0.9599305153445281,
+          "f1_phishing": 0.9351308664259927,
+          "roc_auc": 0.9690352128274529,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9603,
-              1401
+              8592,
+              2412
             ],
             [
-              7007,
-              18898
+              1038,
+              24867
             ]
           ]
         },
@@ -54,20 +69,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.4004057889958289,
-          "accuracy": 0.7519955959262318,
-          "precision_phishing": 0.9384407998202651,
-          "recall_phishing": 0.7321647677475899,
-          "f1_phishing": 0.822567940133911,
-          "roc_auc": 0.8667217075280964,
+          "log_loss": 0.5790526211436561,
+          "accuracy": 0.854803192953482,
+          "precision_phishing": 0.8960817717206133,
+          "recall_phishing": 0.9219982471516214,
+          "f1_phishing": 0.9088552915766739,
+          "roc_auc": 0.8956323083306337,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1287,
-              274
+              951,
+              610
             ],
             [
-              1528,
-              4177
+              445,
+              5260
             ]
           ]
         }
@@ -83,20 +98,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3517489955462662,
-          "accuracy": 0.7722506705681541,
-          "precision_phishing": 0.9309037182959862,
-          "recall_phishing": 0.7296660876278711,
-          "f1_phishing": 0.8180913222246267,
-          "roc_auc": 0.9081954073165723,
+          "log_loss": 0.1972092194029822,
+          "accuracy": 0.9066352380178276,
+          "precision_phishing": 0.9124398574943989,
+          "recall_phishing": 0.9590040532715692,
+          "f1_phishing": 0.9351426635549198,
+          "roc_auc": 0.9691524641493037,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9601,
-              1403
+              8620,
+              2384
             ],
             [
-              7003,
-              18902
+              1062,
+              24843
             ]
           ]
         },
@@ -106,20 +121,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.40043836221359874,
-          "accuracy": 0.7519955959262318,
-          "precision_phishing": 0.9384407998202651,
-          "recall_phishing": 0.7321647677475899,
-          "f1_phishing": 0.822567940133911,
-          "roc_auc": 0.866495779857515,
+          "log_loss": 0.49607081049031443,
+          "accuracy": 0.8549408202587393,
+          "precision_phishing": 0.8966399454204332,
+          "recall_phishing": 0.9214723926380368,
+          "f1_phishing": 0.9088865836791148,
+          "roc_auc": 0.8967604307672613,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1287,
-              274
+              955,
+              606
             ],
             [
-              1528,
-              4177
+              448,
+              5257
             ]
           ]
         }
@@ -135,20 +150,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35170438514763275,
-          "accuracy": 0.770950174754125,
-          "precision_phishing": 0.9323621227887617,
-          "recall_phishing": 0.7263462651997684,
-          "f1_phishing": 0.8165603437052467,
-          "roc_auc": 0.9081947267547987,
+          "log_loss": 0.1971712643165846,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.911838051929001,
+          "recall_phishing": 0.9598147075854082,
+          "f1_phishing": 0.9352114795102777,
+          "roc_auc": 0.9691897933133894,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9639,
-              1365
+              8600,
+              2404
             ],
             [
-              7089,
-              18816
+              1041,
+              24864
             ]
           ]
         },
@@ -158,20 +173,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.4003345665468064,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8665312635274474,
+          "log_loss": 0.4710626761710848,
+          "accuracy": 0.8546655656482246,
+          "precision_phishing": 0.8955249276841926,
+          "recall_phishing": 0.9225241016652059,
+          "f1_phishing": 0.9088240372992574,
+          "roc_auc": 0.8971400835775175,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              947,
+              614
             ],
             [
-              1553,
-              4152
+              442,
+              5263
             ]
           ]
         }
@@ -187,20 +202,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3516273109785202,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082010693098844,
+          "log_loss": 0.19715736516697996,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9119589141599413,
+          "recall_phishing": 0.9596602972399151,
+          "f1_phishing": 0.9352017304617699,
+          "roc_auc": 0.969206891550938,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8604,
+              2400
             ],
             [
-              7093,
-              18812
+              1045,
+              24860
             ]
           ]
         },
@@ -210,20 +225,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.395845326291005,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8665996481951331,
+          "log_loss": 0.46294835547256663,
+          "accuracy": 0.8550784475639966,
+          "precision_phishing": 0.8957128274923444,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.9090909090909091,
+          "roc_auc": 0.8974217632801285,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              948,
+              613
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -239,20 +254,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35165381227958903,
-          "accuracy": 0.770950174754125,
-          "precision_phishing": 0.9323621227887617,
-          "recall_phishing": 0.7263462651997684,
-          "f1_phishing": 0.8165603437052467,
-          "roc_auc": 0.9082083906110259,
+          "log_loss": 0.1971401521134787,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9117172605953953,
+          "recall_phishing": 0.9599691179309013,
+          "f1_phishing": 0.9352212256256934,
+          "roc_auc": 0.9692208658696236,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9639,
-              1365
+              8596,
+              2408
             ],
             [
-              7089,
-              18816
+              1037,
+              24868
             ]
           ]
         },
@@ -262,20 +277,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39584333447424686,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8667348454691789,
+          "log_loss": 0.46238726981754674,
+          "accuracy": 0.8550784475639966,
+          "precision_phishing": 0.895578231292517,
+          "recall_phishing": 0.9230499561787905,
+          "f1_phishing": 0.9091066033664221,
+          "roc_auc": 0.8975993500649317,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              947,
+              614
             ],
             [
-              1553,
-              4152
+              439,
+              5266
             ]
           ]
         }
@@ -291,20 +306,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3516397028593094,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082138666776679,
+          "log_loss": 0.1971143813522453,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9118078474514119,
+          "recall_phishing": 0.9598533101717815,
+          "f1_phishing": 0.9352139163140574,
+          "roc_auc": 0.9692301920215568,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8599,
+              2405
             ],
             [
-              7093,
-              18812
+              1040,
+              24865
             ]
           ]
         },
@@ -314,20 +329,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39591897886355076,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8667257499715063,
+          "log_loss": 0.4498171571267833,
+          "accuracy": 0.8549408202587393,
+          "precision_phishing": 0.8955604694675965,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.9090124309392266,
+          "roc_auc": 0.8980267261654449,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              947,
+              614
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -343,20 +358,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35162005658630213,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082134807921263,
+          "log_loss": 0.19711371205689507,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9117776474039307,
+          "recall_phishing": 0.9598919127581548,
+          "f1_phishing": 0.9352163529345394,
+          "roc_auc": 0.969235113816239,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8598,
+              2406
             ],
             [
-              7093,
-              18812
+              1039,
+              24866
             ]
           ]
         },
@@ -366,20 +381,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3959024882604951,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668122133444425,
+          "log_loss": 0.4451658771551211,
+          "accuracy": 0.8549408202587393,
+          "precision_phishing": 0.8955604694675965,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.9090124309392266,
+          "roc_auc": 0.8982286237557556,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              947,
+              614
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -395,20 +410,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3515973831101415,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082124073287101,
+          "log_loss": 0.19710508273976624,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.911838051929001,
+          "recall_phishing": 0.9598147075854082,
+          "f1_phishing": 0.9352114795102777,
+          "roc_auc": 0.969239870732553,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8600,
+              2404
             ],
             [
-              7093,
-              18812
+              1041,
+              24864
             ]
           ]
         },
@@ -418,20 +433,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3917365892195221,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8667087380221559,
+          "log_loss": 0.43265587778684517,
+          "accuracy": 0.854803192953482,
+          "precision_phishing": 0.8954081632653061,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.908933966335779,
+          "roc_auc": 0.8987890074734672,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              946,
+              615
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -447,20 +462,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3515766540483381,
-          "accuracy": 0.770950174754125,
-          "precision_phishing": 0.9323621227887617,
-          "recall_phishing": 0.7263462651997684,
-          "f1_phishing": 0.8165603437052467,
-          "roc_auc": 0.9082123020871987,
+          "log_loss": 0.1971060501154374,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9118984741784038,
+          "recall_phishing": 0.9597375024126616,
+          "f1_phishing": 0.9352066053527431,
+          "roc_auc": 0.9692402180295407,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9639,
-              1365
+              8602,
+              2402
             ],
             [
-              7089,
-              18816
+              1043,
+              24862
             ]
           ]
         },
@@ -470,20 +485,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39174637238934334,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668072164352274,
+          "log_loss": 0.4328780359344566,
+          "accuracy": 0.8550784475639966,
+          "precision_phishing": 0.8957128274923444,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.9090909090909091,
+          "roc_auc": 0.8987129870793404,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              948,
+              613
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -499,20 +514,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3515693326710091,
-          "accuracy": 0.770950174754125,
-          "precision_phishing": 0.9323621227887617,
-          "recall_phishing": 0.7263462651997684,
-          "f1_phishing": 0.8165603437052467,
-          "roc_auc": 0.9082138596615672,
+          "log_loss": 0.1971161707050435,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9117776474039307,
+          "recall_phishing": 0.9598919127581548,
+          "f1_phishing": 0.9352163529345394,
+          "roc_auc": 0.9692425017703377,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9639,
-              1365
+              8598,
+              2406
             ],
             [
-              7089,
-              18816
+              1039,
+              24866
             ]
           ]
         },
@@ -522,20 +537,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39177812205313994,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8667000916848622,
+          "log_loss": 0.42850092837375614,
+          "accuracy": 0.854803192953482,
+          "precision_phishing": 0.8959468664850136,
+          "recall_phishing": 0.9221735319894829,
+          "f1_phishing": 0.9088710374017448,
+          "roc_auc": 0.8989211729149553,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              950,
+              611
             ],
             [
-              1553,
-              4152
+              444,
+              5261
             ]
           ]
         }
@@ -551,20 +566,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35158722305380674,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082115338241656,
+          "log_loss": 0.19710476322637527,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9117474517855834,
+          "recall_phishing": 0.9599305153445281,
+          "f1_phishing": 0.9352187893717445,
+          "roc_auc": 0.9692491425097056,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8597,
+              2407
             ],
             [
-              7093,
-              18812
+              1038,
+              24867
             ]
           ]
         },
@@ -574,20 +589,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3918262313445386,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668103605578795,
+          "log_loss": 0.4290706985727449,
+          "accuracy": 0.8549408202587393,
+          "precision_phishing": 0.8958297872340426,
+          "recall_phishing": 0.9225241016652059,
+          "f1_phishing": 0.9089810017271157,
+          "roc_auc": 0.8987257320050913,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              949,
+              612
             ],
             [
-              1553,
-              4152
+              442,
+              5263
             ]
           ]
         }
@@ -603,20 +618,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35158707081460133,
-          "accuracy": 0.770950174754125,
-          "precision_phishing": 0.9323621227887617,
-          "recall_phishing": 0.7263462651997684,
-          "f1_phishing": 0.8165603437052467,
-          "roc_auc": 0.9082127441015465,
+          "log_loss": 0.19710727447685825,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9117474517855834,
+          "recall_phishing": 0.9599305153445281,
+          "f1_phishing": 0.9352187893717445,
+          "roc_auc": 0.9692487881966172,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9639,
-              1365
+              8597,
+              2407
             ],
             [
-              7089,
-              18816
+              1038,
+              24867
             ]
           ]
         },
@@ -626,20 +641,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3918855305845138,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668095745272164,
+          "log_loss": 0.42050566669831274,
+          "accuracy": 0.8552160748692541,
+          "precision_phishing": 0.8958652373660031,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.9091694007943361,
+          "roc_auc": 0.8988257824794887,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              949,
+              612
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -655,20 +670,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3516000219039061,
-          "accuracy": 0.770950174754125,
-          "precision_phishing": 0.9323621227887617,
-          "recall_phishing": 0.7263462651997684,
-          "f1_phishing": 0.8165603437052467,
-          "roc_auc": 0.9082123792643071,
+          "log_loss": 0.19710192529061346,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.911838051929001,
+          "recall_phishing": 0.9598147075854082,
+          "f1_phishing": 0.9352114795102777,
+          "roc_auc": 0.9692503247226834,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9639,
-              1365
+              8600,
+              2404
             ],
             [
-              7089,
-              18816
+              1041,
+              24864
             ]
           ]
         },
@@ -678,20 +693,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3919334330454158,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668022756710596,
+          "log_loss": 0.4162495106096881,
+          "accuracy": 0.8549408202587393,
+          "precision_phishing": 0.8958297872340426,
+          "recall_phishing": 0.9225241016652059,
+          "f1_phishing": 0.9089810017271157,
+          "roc_auc": 0.898969457655686,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              949,
+              612
             ],
             [
-              1553,
-              4152
+              442,
+              5263
             ]
           ]
         }
@@ -707,20 +722,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35159236278976586,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082107831013846,
+          "log_loss": 0.19710212479350503,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9116568914956011,
+          "recall_phishing": 0.9600463231036479,
+          "f1_phishing": 0.9352260975839053,
+          "roc_auc": 0.9692527031808404,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8594,
+              2410
             ],
             [
-              7093,
-              18812
+              1035,
+              24870
             ]
           ]
         },
@@ -730,20 +745,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3919441869626508,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8667986823880285,
+          "log_loss": 0.41599791039866946,
+          "accuracy": 0.8552160748692541,
+          "precision_phishing": 0.8958652373660031,
+          "recall_phishing": 0.922874671340929,
+          "f1_phishing": 0.9091694007943361,
+          "roc_auc": 0.8990309926275938,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              949,
+              612
             ],
             [
-              1553,
-              4152
+              440,
+              5265
             ]
           ]
         }
@@ -759,20 +774,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35159294928996937,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082107655611327,
+          "log_loss": 0.1971084435789891,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9118682608376733,
+          "recall_phishing": 0.959776104999035,
+          "f1_phishing": 0.9352090425231799,
+          "roc_auc": 0.9692502580697261,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8601,
+              2403
             ],
             [
-              7093,
-              18812
+              1042,
+              24863
             ]
           ]
         },
@@ -782,20 +797,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39196506487714694,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8667999175790704,
+          "log_loss": 0.4159650525319946,
+          "accuracy": 0.8550784475639966,
+          "precision_phishing": 0.8962521294718909,
+          "recall_phishing": 0.9221735319894829,
+          "f1_phishing": 0.9090280777537797,
+          "roc_auc": 0.8989955651027088,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              952,
+              609
             ],
             [
-              1553,
-              4152
+              444,
+              5261
             ]
           ]
         }
@@ -811,20 +826,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35159986505780066,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082106813679236,
+          "log_loss": 0.19710494669659478,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9117172605953953,
+          "recall_phishing": 0.9599691179309013,
+          "f1_phishing": 0.9352212256256934,
+          "roc_auc": 0.9692517875796915,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8596,
+              2408
             ],
             [
-              7093,
-              18812
+              1037,
+              24868
             ]
           ]
         },
@@ -834,20 +849,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3919849724097542,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668000298691652,
+          "log_loss": 0.4078719000769262,
+          "accuracy": 0.854803192953482,
+          "precision_phishing": 0.8956773315180395,
+          "recall_phishing": 0.9225241016652059,
+          "f1_phishing": 0.9089025127363786,
+          "roc_auc": 0.899214755367607,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              948,
+              613
             ],
             [
-              1553,
-              4152
+              442,
+              5263
             ]
           ]
         }
@@ -863,20 +878,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3515949204775012,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082117864037931,
+          "log_loss": 0.19710208286711603,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9116870738323924,
+          "recall_phishing": 0.9600077205172747,
+          "f1_phishing": 0.9352236616964067,
+          "roc_auc": 0.9692517489911373,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8595,
+              2409
             ],
             [
-              7093,
-              18812
+              1036,
+              24869
             ]
           ]
         },
@@ -886,20 +901,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39186844782104274,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668002544493546,
+          "log_loss": 0.40401419289520046,
+          "accuracy": 0.8549408202587393,
+          "precision_phishing": 0.8956950825250979,
+          "recall_phishing": 0.9226993865030675,
+          "f1_phishing": 0.9089967190467968,
+          "roc_auc": 0.8993655048197715,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              948,
+              613
             ],
             [
-              1553,
-              4152
+              441,
+              5264
             ]
           ]
         }
@@ -915,20 +930,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35159322373063306,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082121337007806,
+          "log_loss": 0.197098783156163,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.911838051929001,
+          "recall_phishing": 0.9598147075854082,
+          "f1_phishing": 0.9352114795102777,
+          "roc_auc": 0.9692534679358231,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8600,
+              2404
             ],
             [
-              7093,
-              18812
+              1041,
+              24864
             ]
           ]
         },
@@ -938,20 +953,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39178519550840346,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668017142205859,
+          "log_loss": 0.40410184228713547,
+          "accuracy": 0.8550784475639966,
+          "precision_phishing": 0.896117166212534,
+          "recall_phishing": 0.9223488168273445,
+          "f1_phishing": 0.9090437937289453,
+          "roc_auc": 0.8993057664893793,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              951,
+              610
             ],
             [
-              1553,
-              4152
+              443,
+              5262
             ]
           ]
         }
@@ -967,20 +982,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.3515921445483667,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082111970513292,
+          "log_loss": 0.19710169593500954,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9121100917431193,
+          "recall_phishing": 0.9594672843080486,
+          "f1_phishing": 0.9351895400244568,
+          "roc_auc": 0.9692534328553193,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8609,
+              2395
             ],
             [
-              7093,
-              18812
+              1050,
+              24855
             ]
           ]
         },
@@ -990,20 +1005,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.39179806115266647,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668011527701125,
+          "log_loss": 0.39987773332759646,
+          "accuracy": 0.8543903110377099,
+          "precision_phishing": 0.8960286347366627,
+          "recall_phishing": 0.9214723926380368,
+          "f1_phishing": 0.9085724161769789,
+          "roc_auc": 0.8994059853989189,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              951,
+              610
             ],
             [
-              1553,
-              4152
+              448,
+              5257
             ]
           ]
         }
@@ -1019,20 +1034,20 @@
             "benign": 11004,
             "phishing": 25905
           },
-          "log_loss": 0.35159095297569787,
-          "accuracy": 0.7708959874285405,
-          "precision_phishing": 0.9324411400247832,
-          "recall_phishing": 0.7261918548542753,
-          "f1_phishing": 0.8164930555555555,
-          "roc_auc": 0.9082121617651836,
+          "log_loss": 0.19709994623255747,
+          "accuracy": 0.9066623316806199,
+          "precision_phishing": 0.9119891408027001,
+          "recall_phishing": 0.9596216946535417,
+          "f1_phishing": 0.9351992927411922,
+          "roc_auc": 0.9692575162259609,
           "confusion_matrix_labels_benign_phishing": [
             [
-              9641,
-              1363
+              8605,
+              2399
             ],
             [
-              7093,
-              18812
+              1046,
+              24859
             ]
           ]
         },
@@ -1042,20 +1057,20 @@
             "benign": 1561,
             "phishing": 5705
           },
-          "log_loss": 0.3917023792670727,
-          "accuracy": 0.749793559042114,
-          "precision_phishing": 0.940004527960154,
-          "recall_phishing": 0.7277826468010518,
-          "f1_phishing": 0.8203912270302312,
-          "roc_auc": 0.8668187823149838,
+          "log_loss": 0.3998575802301174,
+          "accuracy": 0.8543903110377099,
+          "precision_phishing": 0.8956240422271412,
+          "recall_phishing": 0.9219982471516214,
+          "f1_phishing": 0.9086197961651408,
+          "roc_auc": 0.8993611816511248,
           "confusion_matrix_labels_benign_phishing": [
             [
-              1296,
-              265
+              948,
+              613
             ],
             [
-              1553,
-              4152
+              445,
+              5260
             ]
           ]
         }
@@ -1069,20 +1084,20 @@
         "benign": 11004,
         "phishing": 25905
       },
-      "log_loss": 0.35159095297569787,
-      "accuracy": 0.7708959874285405,
-      "precision_phishing": 0.9324411400247832,
-      "recall_phishing": 0.7261918548542753,
-      "f1_phishing": 0.8164930555555555,
-      "roc_auc": 0.9082121617651836,
+      "log_loss": 0.19709994623255747,
+      "accuracy": 0.9066623316806199,
+      "precision_phishing": 0.9119891408027001,
+      "recall_phishing": 0.9596216946535417,
+      "f1_phishing": 0.9351992927411922,
+      "roc_auc": 0.9692575162259609,
       "confusion_matrix_labels_benign_phishing": [
         [
-          9641,
-          1363
+          8605,
+          2399
         ],
         [
-          7093,
-          18812
+          1046,
+          24859
         ]
       ]
     },
@@ -1092,20 +1107,20 @@
         "benign": 1561,
         "phishing": 5705
       },
-      "log_loss": 0.3917023792670727,
-      "accuracy": 0.749793559042114,
-      "precision_phishing": 0.940004527960154,
-      "recall_phishing": 0.7277826468010518,
-      "f1_phishing": 0.8203912270302312,
-      "roc_auc": 0.8668187823149838,
+      "log_loss": 0.3998575802301174,
+      "accuracy": 0.8543903110377099,
+      "precision_phishing": 0.8956240422271412,
+      "recall_phishing": 0.9219982471516214,
+      "f1_phishing": 0.9086197961651408,
+      "roc_auc": 0.8993611816511248,
       "confusion_matrix_labels_benign_phishing": [
         [
-          1296,
-          265
+          948,
+          613
         ],
         [
-          1553,
-          4152
+          445,
+          5260
         ]
       ]
     }

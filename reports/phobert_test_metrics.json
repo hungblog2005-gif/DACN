@@ -1,0 +1,54 @@
+{
+  "model_dir": "E:\\DACN\\DACN\\models\\phoBERT_output\\model",
+  "data_file": "E:\\DACN\\DACN\\data\\PhishVN_v3.1.0_open\\data\\splits\\url_test.csv",
+  "rows": 8941,
+  "class_counts": {
+    "benign": 3845,
+    "phishing": 5096
+  },
+  "threshold": 0.5,
+  "max_length": 128,
+  "batch_size": 8,
+  "accuracy": 0.9389330052566827,
+  "precision_phishing": 0.9551820728291317,
+  "recall_phishing": 0.9368131868131868,
+  "f1_phishing": 0.9459084604715673,
+  "roc_auc": 0.9861060869281191,
+  "confusion_matrix_labels_benign_phishing": [
+    [
+      3621,
+      224
+    ],
+    [
+      322,
+      4774
+    ]
+  ],
+  "classification_report": {
+    "benign": {
+      "precision": 0.9183362921633275,
+      "recall": 0.941742522756827,
+      "f1-score": 0.9298921417565486,
+      "support": 3845.0
+    },
+    "phishing": {
+      "precision": 0.9551820728291317,
+      "recall": 0.9368131868131868,
+      "f1-score": 0.9459084604715673,
+      "support": 5096.0
+    },
+    "accuracy": 0.9389330052566827,
+    "macro avg": {
+      "precision": 0.9367591824962296,
+      "recall": 0.9392778547850069,
+      "f1-score": 0.9379003011140579,
+      "support": 8941.0
+    },
+    "weighted avg": {
+      "precision": 0.9393368623761602,
+      "recall": 0.9389330052566827,
+      "f1-score": 0.9390207806304703,
+      "support": 8941.0
+    }
+  }
+}

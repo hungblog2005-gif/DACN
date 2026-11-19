@@ -1,0 +1,55 @@
+{
+  "model_name": "vinai/phobert-base",
+  "label_to_id": {
+    "benign": 0,
+    "phishing": 1
+  },
+  "max_length": 128,
+  "epochs": 3,
+  "train_batch_size": 8,
+  "eval_batch_size": 8,
+  "gradient_accumulation_steps": 2,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.1,
+  "classifier_dropout": 0.1,
+  "fp16": true,
+  "seed": 42,
+  "rows": {
+    "train": 36909,
+    "validation": 7266,
+    "test": 8941
+  },
+  "train": {
+    "train_runtime": 935.4312,
+    "train_samples_per_second": 118.37,
+    "train_steps_per_second": 7.399,
+    "total_flos": 768071531696280.0,
+    "train_loss": 0.19423960523270506,
+    "epoch": 3.0
+  },
+  "validation": {
+    "validation_loss": 0.4383118152618408,
+    "validation_accuracy": 0.890448665015139,
+    "validation_precision": 0.9597302865705188,
+    "validation_recall": 0.898159509202454,
+    "validation_f1": 0.9279246649764578,
+    "validation_roc_auc": 0.9390080629902515,
+    "validation_runtime": 15.0602,
+    "validation_samples_per_second": 482.465,
+    "validation_steps_per_second": 60.358,
+    "epoch": 3.0
+  },
+  "test": {
+    "test_loss": 0.19304533302783966,
+    "test_accuracy": 0.9389330052566827,
+    "test_precision": 0.9551820728291317,
+    "test_recall": 0.9368131868131868,
+    "test_f1": 0.9459084604715673,
+    "test_roc_auc": 0.9861048620708661,
+    "test_runtime": 21.7656,
+    "test_samples_per_second": 410.786,
+    "test_steps_per_second": 51.366,
+    "epoch": 3.0
+  }
+}

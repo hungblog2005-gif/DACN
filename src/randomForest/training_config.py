@@ -9,7 +9,7 @@ MAX_FEATURES = "sqrt"
 CRITERION = "gini"
 
 # Class balance and positive-class decision threshold
-CLASS_WEIGHT = "balanced_subsample"  # Try None or "balanced" when tuning.
+CLASS_WEIGHT = None
 DECISION_THRESHOLD = 0.5  # Lower it to favor phishing recall over precision.
 
 # Reproducibility and terminal progress

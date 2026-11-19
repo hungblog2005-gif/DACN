@@ -22,15 +22,19 @@ import train_random_forest as trainer  # noqa: E402
 
 
 REQUIRED_SPLITS = [DATA_DIR / filename for filename in trainer.SPLIT_FILES.values()]
+REQUIRED_SPLITS.append(DATA_DIR.parent / "vn_compphish.csv")
 
 
 @unittest.skipUnless(
     all(path.is_file() for path in REQUIRED_SPLITS),
-    "The real PhishVN split CSV files are required for this integration test.",
+    "The official split CSVs and matching CompPhish feature file are required.",
 )
 class RealDatasetTrainingTests(unittest.TestCase):
     def test_training_and_later_test_evaluation(self) -> None:
         training_splits = trainer.load_splits(DATA_DIR, split_names=("train", "val"))
+        self.assertEqual(
+            list(training_splits["train"][0].columns), trainer.FEATURE_COLUMNS
+        )
         expected_rows = {
             name: len(labels) for name, (_, labels) in training_splits.items()
         }
@@ -87,6 +91,9 @@ class RealDatasetTrainingTests(unittest.TestCase):
                 training_metrics = json.load(metrics_file)
             self.assertEqual(
                 set(training_metrics["final_metrics"]), {"train", "val"}
+            )
+            self.assertGreaterEqual(
+                training_metrics["final_metrics"]["val"]["accuracy"], 0.8
             )
             self.assertEqual(len(training_metrics["training_history"]), 2)
             self.assertEqual(

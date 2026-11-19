@@ -38,13 +38,29 @@ DEFAULT_IMPORTANCE_OUT = PROJECT_ROOT / "reports" / "random_forest_feature_impor
 
 FEATURE_COLUMNS = [
     "url_len",
-    "num_dots",
-    "num_subdomains",
-    "has_ip",
-    "has_at",
-    "suspicious_tld",
+    "dom_len",
+    "is_ip",
+    "tld_len",
+    "subdom_cnt",
+    "letter_cnt",
+    "digit_cnt",
+    "special_cnt",
+    "eq_cnt",
+    "qm_cnt",
+    "amp_cnt",
+    "dot_cnt",
+    "dash_cnt",
+    "under_cnt",
+    "letter_ratio",
+    "digit_ratio",
+    "spec_ratio",
+    "slash_cnt",
+    "entropy",
+    "path_len",
+    "query_len",
 ]
 LABEL_TO_INT = {"benign": 0, "phishing": 1}
+RAW_LABEL_TO_INT = {**LABEL_TO_INT, "0": 0, "1": 1}
 SPLIT_FILES = {
     "train": "url_train.csv",
     "val": "url_val.csv",
@@ -61,6 +77,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=DEFAULT_DATA_DIR,
         help="Directory containing the official PhishVN split CSV files",
+    )
+    parser.add_argument(
+        "--feature-data",
+        type=Path,
+        default=None,
+        help="CompPhish feature CSV (defaults to vn_compphish.csv beside the splits directory)",
     )
     parser.add_argument("--model-out", type=Path, default=DEFAULT_MODEL_OUT)
     parser.add_argument("--metrics-out", type=Path, default=DEFAULT_METRICS_OUT)
@@ -84,14 +106,44 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_splits(
-    data_dir: Path, split_names: tuple[str, ...] | None = None
+    data_dir: Path,
+    split_names: tuple[str, ...] | None = None,
+    feature_data_path: Path | None = None,
 ) -> dict[str, tuple[pd.DataFrame, np.ndarray]]:
     names = tuple(split_names) if split_names is not None else tuple(SPLIT_FILES)
     unknown_splits = sorted(set(names) - set(SPLIT_FILES))
     if unknown_splits:
         raise ValueError(f"Unknown split names: {unknown_splits}")
 
-    required = set(FEATURE_COLUMNS) | {"label"}
+    if feature_data_path is None:
+        feature_data_path = data_dir.parent / "vn_compphish.csv"
+    if not feature_data_path.is_file():
+        raise FileNotFoundError(f"Feature data not found: {feature_data_path}")
+
+    required = set(FEATURE_COLUMNS) | {"label", "split"}
+    frame = pd.read_csv(
+        feature_data_path, usecols=lambda column: column in required
+    )
+    missing = required - set(frame.columns)
+    if missing:
+        raise ValueError(
+            f"{feature_data_path.name} is missing required columns: {sorted(missing)}"
+        )
+
+    frame["split"] = frame["split"].astype("string").str.strip().str.lower()
+    frame["label"] = frame["label"].astype("string").str.strip().str.lower()
+    unknown_labels = sorted(set(frame["label"].dropna()) - set(RAW_LABEL_TO_INT))
+    if unknown_labels:
+        raise ValueError(
+            f"Unexpected labels in {feature_data_path.name}: {unknown_labels}"
+        )
+    frame["label"] = frame["label"].map(RAW_LABEL_TO_INT)
+    valid_labels = frame["label"].notna()
+    frame = frame.loc[valid_labels].copy()
+    frame[FEATURE_COLUMNS] = frame[FEATURE_COLUMNS].apply(
+        pd.to_numeric, errors="coerce"
+    )
+
     splits: dict[str, tuple[pd.DataFrame, np.ndarray]] = {}
 
     for split_name in names:
@@ -99,25 +151,29 @@ def load_splits(
         if not data_path.is_file():
             raise FileNotFoundError(f"Dataset split not found: {data_path}")
 
-        frame = pd.read_csv(data_path, usecols=lambda column: column in required)
-        missing = required - set(frame.columns)
-        if missing:
+        reference = pd.read_csv(data_path, usecols=["label"])
+        reference_labels = reference["label"].astype("string").str.strip().str.lower()
+        unknown_reference_labels = sorted(
+            set(reference_labels.dropna()) - set(RAW_LABEL_TO_INT)
+        )
+        if unknown_reference_labels:
             raise ValueError(
-                f"{data_path.name} is missing required columns: {sorted(missing)}"
+                f"Unexpected labels in {data_path.name}: {unknown_reference_labels}"
             )
+        reference_y = reference_labels.map(RAW_LABEL_TO_INT).dropna().astype("int8")
 
-        frame["label"] = frame["label"].astype("string").str.strip().str.lower()
-        unknown_labels = sorted(set(frame["label"].dropna()) - set(LABEL_TO_INT))
-        if unknown_labels:
-            raise ValueError(f"Unexpected labels in {data_path.name}: {unknown_labels}")
-
-        features = frame[FEATURE_COLUMNS].apply(pd.to_numeric, errors="coerce")
-        labels = frame["label"].map(LABEL_TO_INT)
-        valid_labels = labels.notna()
-        features = features.loc[valid_labels].reset_index(drop=True)
-        y = labels.loc[valid_labels].astype("int8").to_numpy()
+        split_frame = frame.loc[frame["split"] == split_name]
+        features = split_frame[FEATURE_COLUMNS].reset_index(drop=True)
+        y = split_frame["label"].astype("int8").to_numpy()
         if len(y) == 0:
             raise ValueError(f"Split '{split_name}' has no rows with valid labels")
+        if len(y) != len(reference_y) or not np.array_equal(
+            np.bincount(y, minlength=2),
+            np.bincount(reference_y.to_numpy(), minlength=2),
+        ):
+            raise ValueError(
+                f"{feature_data_path.name} does not match {data_path.name}"
+            )
         splits[split_name] = (features, y)
 
     if "train" in splits and len(np.unique(splits["train"][1])) < 2:
@@ -169,12 +225,12 @@ def print_metrics_table(
         "Rows",
         "Benign",
         "Phishing",
-        "LogLoss",
         "Accuracy",
         "Precision",
         "Recall",
         "F1",
         "ROC-AUC",
+        "Loss",
     ]
     rows = []
     for split_name, result in splits.items():
@@ -185,12 +241,12 @@ def print_metrics_table(
                 str(result["rows"]),
                 str(counts["benign"]),
                 str(counts["phishing"]),
-                f"{result['log_loss']:.4f}",
                 f"{result['accuracy']:.4f}",
                 f"{result['precision_phishing']:.4f}",
                 f"{result['recall_phishing']:.4f}",
                 f"{result['f1_phishing']:.4f}",
                 "N/A" if result["roc_auc"] is None else f"{result['roc_auc']:.4f}",
+                f"{result['log_loss']:.4f}",
             ]
         )
 
@@ -225,7 +281,11 @@ def main() -> None:
     if not 0.0 <= args.decision_threshold <= 1.0:
         raise ValueError("--decision-threshold must be between 0 and 1")
 
-    splits = load_splits(args.data_dir, split_names=("train", "val"))
+    splits = load_splits(
+        args.data_dir,
+        split_names=("train", "val"),
+        feature_data_path=args.feature_data,
+    )
     model = Pipeline(
         steps=[
             ("imputer", SimpleImputer(strategy="median")),
